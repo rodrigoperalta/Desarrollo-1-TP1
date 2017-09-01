@@ -16,24 +16,23 @@ class Disparo extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(2, 2);
+		loadGraphic(AssetPaths.bala__png, true, 2 ,4);
+		animation.add("shoot", [0, 1], 6, true);
+		animation.play("shoot");
+		
 		kill();
 		velocity.y = Reg.velDisparo;
 	}
-	
 	override public function update (elapsed:Float):Void
 	{
 		super.update(elapsed);
 		if (y<0) 
 		destroy();
-		
 	}
-	
 	override public function destroy():Void
 	{
 		
 		FlxG.state.remove(this);
 		super.destroy();
 	}
-	
 }

@@ -11,13 +11,13 @@ import flixel.FlxG;
 class Personaje extends FlxSprite
 {
 	public var bala(get, null):Disparo;
+	private var disparoConArmaDerecha:Bool = true;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
 		bala = new Disparo();
-		makeGraphic(4, 4);
+		loadGraphic(AssetPaths.personaje__png);
 		FlxG.state.add(bala);
-
 	}
 
 	override public function update(elapsed:Float):Void
@@ -59,12 +59,24 @@ class Personaje extends FlxSprite
 	{
 		if (FlxG.keys.justPressed.SPACE)
 		{
-			if (!bala.alive)
+			if (disparoConArmaDerecha) 
 			{
-				bala.reset(this.x + 1, this.y);
+				bala = new Disparo();
+				FlxG.state.add(bala);
+				bala.x = this.x + 13;
+				bala.y = this.y + 5;
+				disparoConArmaDerecha = false;
 			}
-
+			else if (!disparoConArmaDerecha) 
+			{
+				bala = new Disparo();
+				FlxG.state.add(bala);
+				bala.x = this.x + 5;
+				bala.y = this.y + 5;
+				disparoConArmaDerecha = true;
+			}
 		}
+		
 	}
 	
 	function get_bala():Disparo 
