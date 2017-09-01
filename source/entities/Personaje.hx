@@ -14,7 +14,7 @@ class Personaje extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(20, 20);
+		makeGraphic(4, 4);
 
 	}
 
@@ -32,12 +32,12 @@ class Personaje extends FlxSprite
 
 		if (FlxG.keys.pressed.RIGHT)
 		{
-			velocity.x = 200;
+			velocity.x = 100;
 		}
 
 		if (FlxG.keys.pressed.LEFT)
 		{
-			velocity.x = -200;
+			velocity.x = -100;
 		}
 	}
 
@@ -59,7 +59,7 @@ class Personaje extends FlxSprite
 		{
 			bala = new Disparo();
 			FlxG.state.add(bala);
-			bala.x = this.x + 9;
+			bala.x = this.x + 1;
 			bala.y = this.y;	
 			
 		}

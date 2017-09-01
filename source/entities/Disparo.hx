@@ -16,7 +16,7 @@ class Disparo extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(5, 5);
+		makeGraphic(2, 2);
 		velocity.y = Reg.velDisparo;
 	}
 	

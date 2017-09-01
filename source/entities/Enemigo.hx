@@ -15,7 +15,7 @@ class Enemigo extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(20, 20);
+		makeGraphic(4, 4);
 	}
 
 	override public function update(elapsed:Float):Void
