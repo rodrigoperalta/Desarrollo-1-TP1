@@ -10,7 +10,8 @@ import flixel.FlxG;
  */
 class Enemigo extends FlxSprite
 {
-
+	public var moveR:Bool = true;
+	
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
@@ -26,24 +27,32 @@ class Enemigo extends FlxSprite
 
 	private function movement():Void
 	{
-		velocity.x = 100;
-		if (x>FlxG.width-width)
+		
+		if (x==FlxG.width-width) 
 		{
-			velocity.x = -100;
+			moveR = false;
 		}
 		
-		if (x < FlxG.width - FlxG.width)
+		if (x==0+width) 
 		{
-		velocity.x = 100;
-		
+			moveR = true;
 		}
 		
-		if (x == FlxG.width - width)
-		{
-		y++;
 		
+		if (moveR == true) 
+		{
+			x++;
 		}
-					
+		
+		if (moveR == false) 
+		{
+			x--;
+		}
+		
+		
+		
+		
+	
 	
 		
 
