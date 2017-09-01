@@ -10,11 +10,13 @@ import flixel.FlxG;
  */
 class Personaje extends FlxSprite
 {
-	public var bala:Disparo;
+	public var bala(get, null):Disparo;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
+		bala = new Disparo();
 		makeGraphic(4, 4);
+		FlxG.state.add(bala);
 
 	}
 
@@ -52,22 +54,24 @@ class Personaje extends FlxSprite
 			x = FlxG.width - FlxG.width;
 		}
 	}
-	
-	
-	
+
 	private function disparar():Void
 	{
-		if (FlxG.keys.justPressed.SPACE) 
+		if (FlxG.keys.justPressed.SPACE)
 		{
-			bala = new Disparo();
-			FlxG.state.add(bala);
-			bala.x = this.x + 1;
-			bala.y = this.y;	
-			
+			if (!bala.alive)
+			{
+				bala.reset(this.x + 1, this.y);
+			}
+
 		}
 	}
 	
+	function get_bala():Disparo 
+	{
+		return bala;
+	}
 	
 	
-	
+
 }

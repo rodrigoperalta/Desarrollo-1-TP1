@@ -14,7 +14,7 @@ class Enemigo extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(4, 4);
+		makeGraphic(2, 2);
 	}
 
 	override public function update(elapsed:Float):Void
@@ -25,13 +25,13 @@ class Enemigo extends FlxSprite
 	}
 	public function checkWall():Void
 	{
-		if (x==FlxG.width-width)
+		if (x>FlxG.width-width)
 		{
 			Reg.moveR = false;
 			Reg.moveD = true;
 		}
 
-		if (x==0+width/2)
+		if (x<0+width/2)
 		{
 			Reg.moveR = true;
 			Reg.moveD = true;
@@ -52,12 +52,14 @@ class Enemigo extends FlxSprite
 
 		if (Reg.moveR == true)
 		{
-			x++;
+			velocity.x = 40;
+			
 		}
 
 		if (Reg.moveR == false)
 		{
-			x--;
+			velocity.x = -40;
+			
 		}
 
 	}
