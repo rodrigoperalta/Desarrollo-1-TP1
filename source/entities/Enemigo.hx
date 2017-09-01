@@ -1,5 +1,6 @@
 package entities;
 
+import flixel.math.FlxRandom;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
