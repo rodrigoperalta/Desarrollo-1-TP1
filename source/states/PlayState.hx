@@ -13,7 +13,7 @@ class PlayState extends FlxState
 	{
 		super.create();
 		FlxG.camera.bgColor = 0x00000000;
-		pj = new Personaje(FlxG.width / 2, FlxG.height - 10);
+		pj = new Personaje(FlxG.width / 2, FlxG.height - 25);
 		add(pj);
 		enemigos = new FlxTypedGroup<Enemigo>();
 		for (i in 0...4)
@@ -43,7 +43,6 @@ class PlayState extends FlxState
 		}
 
 		super.update(elapsed);
-
 	}
 
 }

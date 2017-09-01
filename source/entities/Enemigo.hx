@@ -14,14 +14,14 @@ class Enemigo extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(4, 4);
+		loadGraphic(AssetPaths.bandido1__png);
+		scale.set(0.5, 0.5);
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 		movement();
-
 	}
 	public function checkWall():Void
 	{
