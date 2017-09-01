@@ -53,6 +53,8 @@ class Personaje extends FlxSprite
 		}
 	}
 	
+	
+	
 	private function disparar():Void
 	{
 		if (FlxG.keys.justPressed.SPACE) 

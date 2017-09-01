@@ -27,10 +27,23 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
+		var moverRPrevio:Bool = Reg.moveR;
+		for (i in 0...enemigos.length)
+		{
+			enemigos.members[i].checkWall();
+
+		}
+		if (moverRPrevio != Reg.moveR)
+		{
+			for (i in 0...enemigos.length)
+			{
+				enemigos.members[i].goDown();
+			}			
+			Reg.moveD = false;
+		}
+
 		super.update(elapsed);
 
 	}
-
-	
 
 }

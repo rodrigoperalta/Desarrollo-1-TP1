@@ -10,8 +10,7 @@ import flixel.FlxG;
  */
 class Enemigo extends FlxSprite
 {
-	public var moveR:Bool = true;
-	
+
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
@@ -24,43 +23,43 @@ class Enemigo extends FlxSprite
 		movement();
 
 	}
+	public function checkWall():Void
+	{
+		if (x==FlxG.width-width)
+		{
+			Reg.moveR = false;
+			Reg.moveD = true;
+		}
+
+		if (x==0+width/2)
+		{
+			Reg.moveR = true;
+			Reg.moveD = true;
+		}
+
+	}
+
+	public function goDown():Void
+	{
+		if (Reg.moveD == true)
+		{
+			y++;
+		}
+	}
 
 	private function movement():Void
 	{
-		
-		if (x==FlxG.width-width) 
-		{
-			moveR = false;
-		}
-		
-		if (x==0+width) 
-		{
-			moveR = true;
-		}
-		
-		
-		if (moveR == true) 
+
+		if (Reg.moveR == true)
 		{
 			x++;
 		}
-		
-		if (moveR == false) 
+
+		if (Reg.moveR == false)
 		{
 			x--;
 		}
-		
-		
-		
-		
-	
-	
-		
 
 	}
-	
-	/*private function checkBoundaries():Void
-	{
-		
-		
-	}*/
+
 }
