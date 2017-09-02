@@ -16,7 +16,7 @@ class Enemigo extends FlxSprite
 	{
 		super(X, Y, SimpleGraphic);
 		loadGraphic(AssetPaths.bandido1__png);
-		scale.set(0.5, 0.5);
+		scale.set(0.4, 0.4);
 	}
 
 	override public function update(elapsed:Float):Void
@@ -50,16 +50,17 @@ class Enemigo extends FlxSprite
 
 	private function movement():Void
 	{
-
+		
 		if (Reg.moveR == true)
 		{
-			velocity.x = 40;
+			velocity.x = 10;
+			
 			
 		}
 
 		if (Reg.moveR == false)
 		{
-			velocity.x = -40;
+			velocity.x = -10;
 			
 		}
 

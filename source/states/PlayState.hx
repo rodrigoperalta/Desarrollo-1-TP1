@@ -1,5 +1,6 @@
 package states;
 
+import entities.Barril;
 import entities.Enemigo;
 import entities.Personaje;
 import flixel.FlxState;
@@ -9,6 +10,7 @@ class PlayState extends FlxState
 {
 	private var pj:Personaje;
 	private var enemigos:FlxTypedGroup<Enemigo>;
+	private var barril:Barril;
 	override public function create():Void
 	{
 		super.create();
@@ -20,13 +22,17 @@ class PlayState extends FlxState
 		{
 			for (j in 0...5)
 			{
-				var ene:Enemigo = new Enemigo(0.05+(7 * (i + 1)), (7 * (j + 4))-20);
+				var ene:Enemigo = new Enemigo(0.05 + (11 * (i + 1)), (11 * (j + 4)) - 20);
 
 				enemigos.add(ene);
 			}
-
-		}
 		add(enemigos);
+		}
+		for (j in 0...4) 
+		{
+			
+		}
+		
 
 	}
 
