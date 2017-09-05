@@ -179,7 +179,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "4",
+			build: "52",
 			company: "Rodrigo",
 			file: "DesarrolloTP1",
 			fps: 60,
