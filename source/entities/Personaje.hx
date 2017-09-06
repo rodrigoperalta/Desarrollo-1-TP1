@@ -57,24 +57,20 @@ class Personaje extends FlxSprite
 
 	private function disparar():Void
 	{
-		if (FlxG.keys.justPressed.SPACE)
+		if (FlxG.keys.justPressed.SPACE && !bala.alive)
 		{
 			if (disparoConArmaDerecha) 
 			{
-				bala = new Disparo();
-				FlxG.state.add(bala);
-				bala.x = this.x + 13;
-				bala.y = this.y + 5;
+				bala.reset(this.x + 13, this.y + 5);
 				disparoConArmaDerecha = false;
 			}
 			else if (!disparoConArmaDerecha) 
 			{
-				bala = new Disparo();
-				FlxG.state.add(bala);
-				bala.x = this.x + 5;
-				bala.y = this.y + 5;
+				bala.reset(this.x + 5, this.y + 5);
 				disparoConArmaDerecha = true;
 			}
+			
+			bala.velocity.y = Reg.velDisparo;
 		}
 		
 	}

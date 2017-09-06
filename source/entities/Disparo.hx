@@ -21,18 +21,12 @@ class Disparo extends FlxSprite
 		animation.play("shoot");
 		
 		kill();
-		velocity.y = Reg.velDisparo;
 	}
 	override public function update (elapsed:Float):Void
 	{
 		super.update(elapsed);
-		if (y<0) 
-		destroy();
-	}
-	override public function destroy():Void
-	{
 		
-		FlxG.state.remove(this);
-		super.destroy();
+		if (y<0) 
+			kill();
 	}
 }

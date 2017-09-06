@@ -30,16 +30,16 @@ class PlayState extends FlxState
 
 				enemigos.add(ene);
 			}
-		add(enemigos);
+			add(enemigos);
 		}
-		
+
 		var distEntreBarriles:Int = 30;
 		var distEntrePartes:Int = 5;
 		var posDeLinea:Int = 0;
 		var lineaActual:Int = 0;
-		for (j in 0...4) 
+		/*for (j in 0...4)
 		{
-			for (k in 0...9) 
+			for (k in 0...9)
 			{
 				var barril:Barril = new Barril(distEntreBarriles * (j + 1) + distEntrePartes * posDeLinea, FlxG.height - 50 + distEntrePartes * lineaActual);
 				add(barril);
@@ -53,32 +53,38 @@ class PlayState extends FlxState
 			}
 			posDeLinea = 0;
 			lineaActual = 0;
-		}
-		
+		}*/
 
 	}
 
 	override public function update(elapsed:Float):Void
 	{
+		super.update(elapsed);
 		var moverRPrevio:Bool = Reg.moveR;
-		for (i in 0...enemigos.length)
+		for (i in 0...enemigos.members.length)
 		{
 			enemigos.members[i].checkWall();
 
 		}
 		if (moverRPrevio != Reg.moveR)
 		{
-			for (i in 0...enemigos.length)
+			for (i in 0...enemigos.members.length)
 			{
 				enemigos.members[i].goDown();
 			}
 			Reg.moveD = false;
 		}
-		
-		if (FlxG.overlap(pj.bala, enemigos))
+
+		for (i in 0...enemigos.members.length)
 		{
-			pj.bala.kill();
+			
+			if (FlxG.overlap(pj.bala, enemigos.members[i]))
+			{
+				pj.bala.kill();
+				enemigos.remove(enemigos.members[i], true);
+				
+			}
 		}
-		super.update(elapsed);
+
 	}
 }

@@ -17,6 +17,7 @@ class Enemigo extends FlxSprite
 		super(X, Y, SimpleGraphic);
 		loadGraphic(AssetPaths.bandido1__png);
 		scale.set(0.4, 0.4);
+		updateHitbox();
 	}
 
 	override public function update(elapsed:Float):Void
