@@ -10,7 +10,7 @@ class Reg
 	static public var moveR:Bool = true;
 	static public var moveD:Bool = false;
 	static public var imagenAColocar:Int = 0;
-	
+	static public var counter:Int = 0;
 	
 	
 }

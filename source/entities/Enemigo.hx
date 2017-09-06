@@ -11,6 +11,7 @@ import flixel.FlxG;
  */
 class Enemigo extends FlxSprite
 {
+	public var balaEne(get, null):Disparo;
 
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
@@ -18,12 +19,16 @@ class Enemigo extends FlxSprite
 		loadGraphic(AssetPaths.bandido1__png);
 		scale.set(0.4, 0.4);
 		updateHitbox();
+		balaEne = new Disparo();
+		FlxG.state.add(balaEne);
+
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 		movement();
+
 	}
 	public function checkWall():Void
 	{
@@ -51,20 +56,35 @@ class Enemigo extends FlxSprite
 
 	private function movement():Void
 	{
-		
+
 		if (Reg.moveR == true)
 		{
 			velocity.x = 10;
-			
-			
+
 		}
 
 		if (Reg.moveR == false)
 		{
 			velocity.x = -10;
-			
+
 		}
 
+	}
+
+	public function disparar():Void
+	{
+		if (!balaEne.alive)
+		{
+			balaEne.reset(this.x, this.y);
+			balaEne.velocity.y = -Reg.velDisparo;
+
+		}
+
+	}
+
+	function get_balaEne():Disparo
+	{
+		return balaEne;
 	}
 
 }

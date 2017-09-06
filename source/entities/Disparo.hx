@@ -26,7 +26,7 @@ class Disparo extends FlxSprite
 	{
 		super.update(elapsed);
 		
-		if (y<0) 
+		if (y<0 || y>FlxG.height) 
 			kill();
 	}
 }
