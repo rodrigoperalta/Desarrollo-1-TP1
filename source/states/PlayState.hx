@@ -12,14 +12,10 @@ class PlayState extends FlxState
 {
 	private var pj:Personaje;
 	private var enemigos:FlxTypedGroup<Enemigo>;
+	private var barriles:FlxTypedGroup<Barril>;
 	private var random:FlxRandom;
 	private var test:Int;
 
-	//private var barr:Barril;
-	//var distEntreBarriles:Int;
-	//var distEntrePartes:Int;
-	//var posDeLinea:Int;
-	//var lineaActual:Int;
 	override public function create():Void
 	{
 		super.create();
@@ -39,26 +35,24 @@ class PlayState extends FlxState
 			add(enemigos);
 		}
 
-		var distEntreBarriles:Int = 30;
-		var distEntrePartes:Int = 5;
-		var posDeLinea:Int = 0;
-		var lineaActual:Int = 0;
+		barriles = new FlxTypedGroup<Barril>();
 		for (j in 0...4)
 		{
 			for (k in 0...9)
 			{
-				var barril:Barril = new Barril(distEntreBarriles * (j + 1) + distEntrePartes * posDeLinea, FlxG.height - 50 + distEntrePartes * lineaActual);
+				var barril:Barril = new Barril(Reg.distEntreBarriles * j + Reg.distEntrePartes * Reg.posDeLinea + 20, FlxG.height - 50 + Reg.distEntrePartes * Reg.lineaActual);
 				add(barril);
-				if (posDeLinea < 2)
-					posDeLinea++;
+				if (Reg.posDeLinea < 2)
+					Reg.posDeLinea++;
 				else
 				{
-					posDeLinea = 0;
-					lineaActual++;
+					Reg.posDeLinea = 0;
+					Reg.lineaActual++;
 				}
 			}
-			posDeLinea = 0;
-			lineaActual = 0;
+			add(barriles);
+			Reg.posDeLinea = 0;
+			Reg.lineaActual = 0;
 		}
 
 	}

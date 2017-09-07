@@ -16,6 +16,7 @@ class Barril extends FlxSprite
 		super(X, Y, SimpleGraphic);
 		fabricarBarril();
 		scale.set(0.6, 0.6);
+		updateHitbox();
 	}
 	
 	private function fabricarBarril() 
@@ -30,7 +31,7 @@ class Barril extends FlxSprite
 			case 2:
 				loadGraphic(AssetPaths.barrilArribaDerecha__png);
 			case 3:
-				loadGraphic(AssetPaths.barrilMedioizquierda__png);
+				loadGraphic(AssetPaths.barrilMedioIzquierda__png);
 			case 4:
 				loadGraphic(AssetPaths.barrilMedioMedio__png);
 			case 5:
