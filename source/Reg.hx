@@ -21,5 +21,6 @@ class Reg
 	static public var cuandoDisparar:Int = 0;
 	static public var velAborigen:Int = 23;
 	static public var timer:Float = 0;
+	static public var puntaje:Int = 0;
 	
 }
