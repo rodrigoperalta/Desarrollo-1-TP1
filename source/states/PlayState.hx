@@ -196,8 +196,15 @@ class PlayState extends FlxState
 		}
 		//Colision Balas-Barriles
 		for (j in 0...enemigos.members.length)
+		for (j in 0...enemigos.members.length) //Colision Bala-BalaEnemiga
 		{
 			for (i in 0...barriles.members.length)
+			if (FlxG.overlap(enemigos.members[j].balaEne, pj.bala)) 
+			{
+				enemigos.members[j].balaEne.kill();
+				pj.bala.kill();
+			}
+			for (i in 0...barriles.members.length) //Colision Balas-Barriles
 			{
 				if (FlxG.overlap(enemigos.members[j].balaEne, barriles.members[i]))
 				{
