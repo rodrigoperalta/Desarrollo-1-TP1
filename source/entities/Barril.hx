@@ -32,7 +32,7 @@ class Barril extends FlxSprite
 			case 2:
 				loadGraphic(AssetPaths.barrilArribaDerecha__png, true, 4, 4);
 			case 3:
-				loadGraphic(AssetPaths.barrilMedioizquierda__png, true, 4, 4);
+				loadGraphic(AssetPaths.barrilMedioIzquierda__png, true, 4, 4);
 			case 4:
 				loadGraphic(AssetPaths.barrilMedioMedio__png, true, 4, 4);
 			case 5:

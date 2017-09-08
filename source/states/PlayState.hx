@@ -107,6 +107,7 @@ class PlayState extends FlxState
 		{
 			if (FlxG.overlap(pj,enemigos.members[i].balaEne ))
 			{
+				enemigos.members[i].balaEne.kill();
 				pj.kill();
 				pj.perderVidas();
 				if (pj.get_vidas() > 0)
@@ -153,13 +154,22 @@ class PlayState extends FlxState
 				}
 			}
 		}
-
-		abo.revivir();
-		Reg.timer += elapsed;
-		if (Reg.timer > 10)
-		{
-			Reg.timer = 0;
-		}
-		trace(abo.alive,Reg.timer);
+		if (FlxG.overlap(pj.bala, abo))
+	{
+		pj.bala.kill();
+		abo.kill();
+		var r = new FlxRandom();
+		var num:Int = r.int(0, 5);
+		puntaje += (num + 1) * 50;
+		trace(puntaje); 
 	}
+	abo.revivir();
+	Reg.timer += elapsed;
+	if (Reg.timer > 10)
+	{
+		Reg.timer = 0;
+	}
+	}
+	
+	
 }
