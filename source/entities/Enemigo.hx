@@ -50,7 +50,7 @@ class Enemigo extends FlxSprite
 	{
 		if (Reg.moveD == true)
 		{
-			y++;
+			y += 2;
 		}
 	}
 

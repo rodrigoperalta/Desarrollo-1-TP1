@@ -12,12 +12,11 @@ class Reg
 	static public var counter:Int = 0;
 	// Para la creacion de los barriles
 	static public var imagenAColocar:Int = 0;
-	static public var distEntreBarriles:Int = 40;
-	static public var distEntrePartes:Int = 8;
+	static public var distEntreBarriles:Int = 35;
+	static public var distEntrePartes:Int = 5;
 	static public var posDeLinea:Int = 0;
 	static public var lineaActual:Int = 0;
 	//
-	static public var cuandoDisparar:Int = 0;
-	
+	static public var cuandoDisparo:Int = 0;
 	
 }

@@ -17,6 +17,8 @@ class Personaje extends FlxSprite
 		super(X, Y, SimpleGraphic);
 		bala = new Disparo();
 		loadGraphic(AssetPaths.personaje__png);
+		scale.set(0.7, 0.7);
+		updateHitbox();
 		FlxG.state.add(bala);
 	}
 
