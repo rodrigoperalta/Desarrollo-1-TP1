@@ -15,6 +15,7 @@ class PlayState extends FlxState
 	private var barriles:FlxTypedGroup<Barril>;
 	private var random:FlxRandom;
 	private var test:Int;
+	private var puntaje:Int = 0;
 
 	override public function create():Void
 	{
@@ -84,10 +85,11 @@ class PlayState extends FlxState
 			{
 				pj.bala.kill();
 				enemigos.remove(enemigos.members[i], true);
-
+				puntaje +=  10;
+ 
 			}
 		}
-
+trace(puntaje);
 		for (i in 0...enemigos.members.length) //Colision Pj-Enemigos
 		{
 
@@ -104,9 +106,16 @@ class PlayState extends FlxState
 			if (FlxG.overlap(pj,enemigos.members[i].balaEne ))
 			{
 				pj.kill();
+				pj.perderVidas();
+				if (pj.get_vidas() > 0) 
+				{
+					pj.reset(FlxG.width / 2, FlxG.height - 25);
+				}
 
 			}
 		}
+		
+		trace(pj.get_vidas());
 		
 		Reg.cuandoDisparo++;
 		if (Reg.cuandoDisparo%70 == 0) 

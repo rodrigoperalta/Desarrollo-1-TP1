@@ -12,6 +12,7 @@ class Personaje extends FlxSprite
 {
 	public var bala(get, null):Disparo;
 	private var disparoConArmaDerecha:Bool = true;
+	private var vidas(get, null) = 5;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
@@ -61,27 +62,35 @@ class Personaje extends FlxSprite
 	{
 		if (FlxG.keys.justPressed.SPACE && !bala.alive)
 		{
-			if (disparoConArmaDerecha) 
+			if (disparoConArmaDerecha)
 			{
 				bala.reset(this.x + 13, this.y + 5);
 				disparoConArmaDerecha = false;
 			}
-			else if (!disparoConArmaDerecha) 
+			else if (!disparoConArmaDerecha)
 			{
 				bala.reset(this.x + 5, this.y + 5);
 				disparoConArmaDerecha = true;
 			}
-			
+
 			bala.velocity.y = Reg.velDisparo;
 		}
-		
+
 	}
-	
-	function get_bala():Disparo 
+
+	function get_bala():Disparo
 	{
 		return bala;
 	}
-	
-	
+
+	public function perderVidas()
+	{
+		vidas--;
+	}
+
+	public function get_vidas()
+	{
+		return vidas;
+	}
 
 }
