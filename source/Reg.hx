@@ -6,7 +6,7 @@ package;
  */
 class Reg 
 {
-	static public var velDisparo:Float = -100;
+	static public var velDisparo:Float = -140;
 	static public var moveR:Bool = true;
 	static public var moveD:Bool = false;
 	static public var counter:Int = 0;
@@ -16,6 +16,8 @@ class Reg
 	static public var distEntrePartes:Int = 8;
 	static public var posDeLinea:Int = 0;
 	static public var lineaActual:Int = 0;
+	//
+	static public var cuandoDisparar:Int = 0;
 	
 	
 }

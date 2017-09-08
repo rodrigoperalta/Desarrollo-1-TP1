@@ -106,6 +106,20 @@ class PlayState extends FlxState
 
 			}
 		}
+		
+		
+		if (Reg.cuandoDisparar%70 == 0) 
+		{
+			enemigos.members[random.int(0, enemigos.members.length)].disparar();
+		}
+		
+		Reg.cuandoDisparar++;
+		
+		if (Reg.cuandoDisparar == 70)
+		{
+			Reg.cuandoDisparar = 0;
+		}
+		
 
 		if (FlxG.keys.justPressed.Q) //Disparo de los enemigos
 		{
