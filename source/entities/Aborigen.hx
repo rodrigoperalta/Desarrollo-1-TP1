@@ -20,15 +20,18 @@ class Aborigen extends FlxSprite
 		animation.add("move", [0, 1], 6, true);
 		animation.play("move");
 		scale.set(0.5, 0.5);
+		updateHitbox();
 		
 		randomTime = new FlxRandom();
-		randomNum = randomTime.int(1, 3);
+		randomNum = randomTime.int(3, 5);
 		
 		kill();
 	}
 	override public function update (elapsed:Float):Void
 	{
 		super.update(elapsed);
+		
+
 		revivir();
 		movement();
 		checkBorders();

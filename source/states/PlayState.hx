@@ -40,12 +40,10 @@ class PlayState extends FlxState
 			for (j in 0...5)
 			{
 				var ene:Enemigo = new Enemigo(0.05 + (11 * (i + 1)), (11 * (j + 4)) - 20);
-
 				enemigos.add(ene);
 			}
 			add(enemigos);
 		}
-
 		barriles = new FlxTypedGroup<Barril>();
 		for (j in 0...4)
 		{
@@ -92,7 +90,6 @@ class PlayState extends FlxState
 		for (i in 0...enemigos.members.length) //Checkea si el enemigo toca las paredes
 		{
 			enemigos.members[i].checkWall();
-
 		}
 		if (moverRPrevio != Reg.moveR) //Si se toca una pared, bajan los enemigos
 		{
@@ -102,22 +99,17 @@ class PlayState extends FlxState
 			}
 			Reg.moveD = false;
 		}
-
 		for (i in 0...enemigos.members.length) //Colision Balas-Enemigos
 		{
-
 			if (FlxG.overlap(pj.bala, enemigos.members[i]))
 			{
 				pj.bala.kill();
 				enemigos.remove(enemigos.members[i], true);
 				Reg.puntaje +=  10;
-
 			}
 		}
-		trace(Reg.puntaje);
 		for (i in 0...enemigos.members.length) //Colision Pj-Enemigos
 		{
-
 			if (FlxG.overlap(pj, enemigos.members[i]))
 			{
 				pj.kill();
@@ -175,12 +167,10 @@ class PlayState extends FlxState
 		{
 			enemigos.members[random.int(0, enemigos.members.length - 1)].disparar();
 		}
-
 		if (Reg.cuandoDisparo == 70)
 		{
 			Reg.cuandoDisparo = 0;
 		}
-
 		if (FlxG.keys.justPressed.Q)
 		{
 			enemigos.members[random.int(0, enemigos.members.length - 1)].disparar();
@@ -213,21 +203,31 @@ class PlayState extends FlxState
 				}
 			}
 		}
-//Colision Balas-Aborigen
+		//Colision Balas-Aborigen
 		if (FlxG.overlap(pj.bala, abo))
 		{
 			pj.bala.kill();
 			abo.kill();
+			if (abo.movIzqADer) 
+			{
+				abo.movIzqADer == false;
+			}
+			else if (!abo.movIzqADer)
+			{
+				abo.movIzqADer == true;
+			}
+			Reg.timer = 0;
 			var r = new FlxRandom();
 			var num:Int = r.int(0, 5);
 			Reg.puntaje += (num + 1) * 50;
 		}
+		
 		abo.revivir();
 		Reg.timer += elapsed;
-		if (Reg.timer > 10)
+		if (Reg.timer > 12)
 		{
 			Reg.timer = 0;
 		}
+		trace(Reg.timer);
 	}
-
 }
