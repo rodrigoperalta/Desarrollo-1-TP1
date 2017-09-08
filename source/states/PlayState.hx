@@ -42,7 +42,7 @@ class PlayState extends FlxState
 			{
 				var barril:Barril = new Barril(Reg.distEntreBarriles * j + Reg.distEntrePartes * Reg.posDeLinea + 20, //X
 											   FlxG.height - 50 + Reg.distEntrePartes * Reg.lineaActual);			  //Y
-				add(barril);
+				barriles.add(barril);
 				if (Reg.posDeLinea < 2)
 					Reg.posDeLinea++;
 				else
@@ -132,5 +132,17 @@ class PlayState extends FlxState
 				barriles.members[i].barrilColision();
 			}
 		}
+		for (j in 0...enemigos.members.length) 
+		{
+			for (i in 0...barriles.members.length) //Colision Balas-Barriles
+		{
+			if (FlxG.overlap(enemigos.members[j].balaEne, barriles.members[i]))
+			{
+				enemigos.members[j].balaEne.kill();
+				barriles.members[i].barrilColision();
+			}
+		}
+		}
+		
 	}
 }
