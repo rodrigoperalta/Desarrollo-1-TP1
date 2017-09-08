@@ -1,5 +1,6 @@
 package states;
 
+import entities.Aborigen;
 import entities.Barril;
 import entities.Enemigo;
 import entities.Personaje;
@@ -16,6 +17,7 @@ class PlayState extends FlxState
 	private var random:FlxRandom;
 	private var test:Int;
 	private var puntaje:Int = 0;
+	private var abo:Aborigen;
 
 	override public function create():Void
 	{
@@ -43,7 +45,7 @@ class PlayState extends FlxState
 			{
 				var barril:Barril = new Barril(Reg.distEntreBarriles * j + Reg.distEntrePartes * Reg.posDeLinea + 20, //X
 											   FlxG.height - 50 + Reg.distEntrePartes * Reg.lineaActual);			  //Y
-				add(barril);
+				barriles.add(barril);
 				if (Reg.posDeLinea < 2)
 					Reg.posDeLinea++;
 				else
@@ -56,7 +58,8 @@ class PlayState extends FlxState
 			Reg.posDeLinea = 0;
 			Reg.lineaActual = 0;
 		}
-
+		abo = new Aborigen();
+		add(abo);
 	}
 
 	override public function update(elapsed:Float):Void
@@ -86,10 +89,10 @@ class PlayState extends FlxState
 				pj.bala.kill();
 				enemigos.remove(enemigos.members[i], true);
 				puntaje +=  10;
- 
+
 			}
 		}
-trace(puntaje);
+		trace(puntaje);
 		for (i in 0...enemigos.members.length) //Colision Pj-Enemigos
 		{
 
@@ -102,35 +105,33 @@ trace(puntaje);
 
 		for (i in 0...enemigos.members.length) //Colision Pj-Balas Enemigos
 		{
-
 			if (FlxG.overlap(pj,enemigos.members[i].balaEne ))
 			{
 				pj.kill();
 				pj.perderVidas();
-				if (pj.get_vidas() > 0) 
+				if (pj.get_vidas() > 0)
 				{
 					pj.reset(FlxG.width / 2, FlxG.height - 25);
 				}
 
 			}
 		}
-		
+
 		trace(pj.get_vidas());
-		
+
 		Reg.cuandoDisparo++;
-		if (Reg.cuandoDisparo%70 == 0) 
+		if (Reg.cuandoDisparo%70 == 0)
 		{
 			enemigos.members[random.int(0, enemigos.members.length)].disparar();
 		}
-		
-		if (Reg.cuandoDisparo == 70) 
+
+		if (Reg.cuandoDisparo == 70)
 		{
 			Reg.cuandoDisparo = 0;
 		}
 
 		if (FlxG.keys.justPressed.Q) //Disparo de los enemigos
 		{
-
 			enemigos.members[random.int(0, enemigos.members.length)].disparar();
 		}
 		for (i in 0...barriles.members.length) //Colision Balas-Barriles
@@ -141,5 +142,24 @@ trace(puntaje);
 				barriles.members[i].barrilColision();
 			}
 		}
+		for (j in 0...enemigos.members.length)
+		{
+			for (i in 0...barriles.members.length) //Colision Balas-Barriles
+			{
+				if (FlxG.overlap(enemigos.members[j].balaEne, barriles.members[i]))
+				{
+					enemigos.members[j].balaEne.kill();
+					barriles.members[i].barrilColision();
+				}
+			}
+		}
+
+		abo.revivir();
+		Reg.timer += elapsed;
+		if (Reg.timer > 10)
+		{
+			Reg.timer = 0;
+		}
+		trace(abo.alive,Reg.timer);
 	}
 }

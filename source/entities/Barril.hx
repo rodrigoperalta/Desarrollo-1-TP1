@@ -55,12 +55,12 @@ class Barril extends FlxSprite
 	}
 	public function barrilColision()
 	{
-		if (animation.name == "s0") 
-			animation.play("s1");
-		if (animation.name == "s1") 
-			animation.play("s2");
 		if (animation.name == "s2") 
 			kill();
+		if (animation.name == "s1") 
+			animation.play("s2");
+		if (animation.name == "s0") 
+			animation.play("s1");
 	}
 	
 }
