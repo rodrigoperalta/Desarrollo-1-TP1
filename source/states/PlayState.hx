@@ -4,6 +4,7 @@ import entities.Aborigen;
 import entities.Barril;
 import entities.Enemigo;
 import entities.Personaje;
+import entities.Vidas;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -18,13 +19,17 @@ class PlayState extends FlxState
 	private var random:FlxRandom;
 	private var test:Int;
 	private var puntaje:FlxText;
+	private var highscore:FlxText;
 	private var abo:Aborigen;
+	private var vidas:FlxTypedGroup<Vidas>;
 
 	override public function create():Void
 	{
 		super.create();
-		puntaje = new FlxText(FlxG.width * 3 / 4, FlxG.height - 12, 0, "Score " + Reg.puntaje, 8,true);
+		puntaje = new FlxText(FlxG.width * 3 / 4 -5, FlxG.height - 12, 0, "Score " + Reg.puntaje, 8,true);
 		puntaje.font = AssetPaths.kenpixel_mini__ttf;
+		highscore = new FlxText(FlxG.width /2 - 30, FlxG.height - 12, 0, "HighScore " + Reg.highscore, 8,true);
+		highscore.font = AssetPaths.kenpixel_mini__ttf;
 		FlxG.camera.bgColor = 0x00000000;
 		random = new FlxRandom();
 		pj = new Personaje(FlxG.width / 2, FlxG.height - 25);
@@ -64,14 +69,25 @@ class PlayState extends FlxState
 		abo = new Aborigen();
 		add(abo);
 		add(puntaje);
+		add(highscore);
+
+		vidas = new FlxTypedGroup<Vidas>();
+		for (i in 0...5)
+		{
+			var vida:Vidas = new Vidas(0.1 + (5* (i + 1)), FlxG.height - 20);
+
+			vidas.add(vida);
+			
+		}
+		add(vidas);
+		
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 
-
-puntaje.text = "Score " + Reg.puntaje;
+		puntaje.text = "Score " + Reg.puntaje;
 		var moverRPrevio:Bool = Reg.moveR; //Guarda la posicion anterior
 		for (i in 0...enemigos.members.length) //Checkea si el enemigo toca las paredes
 		{
@@ -105,6 +121,20 @@ puntaje.text = "Score " + Reg.puntaje;
 			if (FlxG.overlap(pj, enemigos.members[i]))
 			{
 				pj.kill();
+				pj.perderVidas();
+				vidas.remove(vidas.members[vidas.members.length - 1], true);
+				if (pj.get_vidas() > 0)
+				{
+					pj.reset(FlxG.width / 2, FlxG.height - 25);
+				}
+				if (pj.get_vidas() == 0) 
+				{
+					if (Reg.puntaje > Reg.highscore) 
+					{
+						Reg.highscore = Reg.puntaje;
+					}
+					Reg.puntaje = 0;
+					FlxG.resetState();
 
 			}
 		}
@@ -116,15 +146,28 @@ puntaje.text = "Score " + Reg.puntaje;
 				enemigos.members[i].balaEne.kill();
 				pj.kill();
 				pj.perderVidas();
+				vidas.remove(vidas.members[vidas.members.length - 1], true);
 				if (pj.get_vidas() > 0)
 				{
 					pj.reset(FlxG.width / 2, FlxG.height - 25);
+				}
+				if (pj.get_vidas() == 0) 
+				{
+					if (Reg.puntaje > Reg.highscore) 
+					{
+						Reg.highscore = Reg.puntaje;
+					}
+					Reg.puntaje = 0;
+					FlxG.resetState();
 				}
 
 			}
 		}
 
-		trace(pj.get_vidas());
+		if (Reg.puntaje > Reg.highscore) 
+		{
+			highscore.text = "HighScore " + Reg.puntaje;
+		}
 
 		//Disparo de los enemigo
 		Reg.cuandoDisparo++;
@@ -140,7 +183,7 @@ puntaje.text = "Score " + Reg.puntaje;
 
 		if (FlxG.keys.justPressed.Q)
 		{
-			enemigos.members[random.int(0, enemigos.members.length)].disparar();
+			enemigos.members[random.int(0, enemigos.members.length - 1)].disparar();
 		}
 		//Colision Balas-Barriles
 		for (i in 0...barriles.members.length)
