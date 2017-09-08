@@ -1,5 +1,6 @@
 package states;
 
+import entities.Aborigen;
 import entities.Barril;
 import entities.Enemigo;
 import entities.Personaje;
@@ -15,6 +16,7 @@ class PlayState extends FlxState
 	private var barriles:FlxTypedGroup<Barril>;
 	private var random:FlxRandom;
 	private var test:Int;
+	private var abo:Aborigen;
 
 	override public function create():Void
 	{
@@ -29,12 +31,12 @@ class PlayState extends FlxState
 			for (j in 0...5)
 			{
 				var ene:Enemigo = new Enemigo(0.05 + (11 * (i + 1)), (11 * (j + 4)) - 20);
-
+				
 				enemigos.add(ene);
 			}
 			add(enemigos);
 		}
-
+		
 		barriles = new FlxTypedGroup<Barril>();
 		for (j in 0...4)
 		{
@@ -55,8 +57,9 @@ class PlayState extends FlxState
 			Reg.posDeLinea = 0;
 			Reg.lineaActual = 0;
 		}
-
-	}
+		abo = new Aborigen();
+		add(abo);
+	}	
 
 	override public function update(elapsed:Float):Void
 	{
@@ -100,11 +103,9 @@ class PlayState extends FlxState
 
 		for (i in 0...enemigos.members.length) //Colision Pj-Balas Enemigos
 		{
-
 			if (FlxG.overlap(pj,enemigos.members[i].balaEne ))
 			{
 				pj.kill();
-
 			}
 		}
 		
@@ -119,9 +120,9 @@ class PlayState extends FlxState
 			Reg.cuandoDisparo = 0;
 		}
 
+		
 		if (FlxG.keys.justPressed.Q) //Disparo de los enemigos
 		{
-
 			enemigos.members[random.int(0, enemigos.members.length)].disparar();
 		}
 		for (i in 0...barriles.members.length) //Colision Balas-Barriles
@@ -144,5 +145,14 @@ class PlayState extends FlxState
 		}
 		}
 		
+		
+		
+		abo.revivir();
+		Reg.timer += elapsed;
+		if (Reg.timer > 10) 
+		{
+			Reg.timer = 0;
+		}
+		trace(abo.alive,Reg.timer);
 	}
 }
