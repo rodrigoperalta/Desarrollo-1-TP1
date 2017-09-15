@@ -20,6 +20,8 @@ class Disparo extends FlxSprite
 		animation.add("shoot", [0, 1], 6, true);
 		animation.play("shoot");
 		
+		
+		
 		kill();
 	}
 	override public function update (elapsed:Float):Void

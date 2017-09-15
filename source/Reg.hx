@@ -18,5 +18,9 @@ class Reg
 	static public var lineaActual:Int = 0;
 	//
 	static public var cuandoDisparo:Int = 0;
+	static public var puntaje:Int = 0;
+	static public var highscore:Int = 0;
+	static public var timer:Float = 0;
+	static public var velAborigen:Int = 23;
 	
 }

@@ -18,7 +18,7 @@ class Personaje extends FlxSprite
 		super(X, Y, SimpleGraphic);
 		bala = new Disparo();
 		loadGraphic(AssetPaths.personaje__png);
-		scale.set(0.7, 0.7);
+		scale.set(0.6, 0.6);
 		updateHitbox();
 		FlxG.state.add(bala);
 	}
@@ -64,14 +64,15 @@ class Personaje extends FlxSprite
 		{
 			if (disparoConArmaDerecha)
 			{
-				bala.reset(this.x + 13, this.y + 5);
+				bala.reset(this.x + 10, this.y + 5);
 				disparoConArmaDerecha = false;
 			}
 			else if (!disparoConArmaDerecha)
 			{
-				bala.reset(this.x + 5, this.y + 5);
+				bala.reset(this.x, this.y + 5);
 				disparoConArmaDerecha = true;
 			}
+			FlxG.sound.play(AssetPaths.disparo__ogg,1, false);
 
 			bala.velocity.y = Reg.velDisparo;
 		}

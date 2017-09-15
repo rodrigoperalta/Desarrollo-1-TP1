@@ -76,7 +76,7 @@ class Enemigo extends FlxSprite
 		if (!balaEne.alive)
 		{
 			balaEne.reset(this.x, this.y);
-			balaEne.velocity.y = -Reg.velDisparo;
+			balaEne.velocity.y = -Reg.velDisparo + 5;
 
 		}
 
