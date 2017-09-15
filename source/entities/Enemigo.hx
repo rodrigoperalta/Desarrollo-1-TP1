@@ -21,14 +21,12 @@ class Enemigo extends FlxSprite
 		updateHitbox();
 		balaEne = new Disparo();
 		FlxG.state.add(balaEne);
-
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 		movement();
-
 	}
 	public function checkWall():Void
 	{
